@@ -10,3 +10,4 @@ known_devices.yaml
 *.db*
 /custom_components
 /bosch_shc/
+.DS_Store
