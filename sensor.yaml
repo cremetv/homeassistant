@@ -1,0 +1,6 @@
+# GitHub Integration
+  - platform: github
+    access_token: !secret github_token
+    repositories: 
+      - path: 'cremetv/homeassistant'
+        name: creme's Homeassistant Config
