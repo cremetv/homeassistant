@@ -1,14 +1,14 @@
 ---
-type: "custom:state-switch"
+type: 'custom:state-switch'
 view_layout:
-  grid-area: "popup"
+  grid-area: 'popup'
   show:
     # only show when screen-width is larger than 1100px
-    mediaquery: "(min-width: 1100px)"
+    mediaquery: '(min-width: 1100px)'
 # add your input_select
 entity:
-default: "default"
-transition: "slide-down"
+default: 'default'
+transition: 'slide-down'
 transition_time: 500
 # options set in the input_select
 states:
@@ -142,7 +142,8 @@ states:
   #     ulm_popup_power_outlet_graph_sensor:
 
   ## Rooms
-  livingroom: !include "../views/livingroom.yaml"
+  livingroom: !include '../views/esszimmer.yaml'
+  kueche: !include '../views/kueche.yaml'
   # bedroom: !include "../views/bedroom.yaml"
   # bathroom: !include "../views/bathroom.yaml"
   # garage: !include "../views/garage.yaml"

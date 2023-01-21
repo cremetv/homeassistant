@@ -1,0 +1,57 @@
+---
+button_card_templates: !include_dir_merge_named '../../../custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/'
+
+title: 'OBK'
+theme: 'minimalist-desktop'
+background: 'var(--background-image)'
+views:
+  - type: 'custom:grid-layout'
+    title: 'home'
+    icon: 'mdi:home'
+    path: '0'
+    layout:
+      grid-template-columns: '1fr 1fr'
+      grid-template-rows: 'min-content'
+      grid-template-areas: |
+        "main popup"
+      mediaquery:
+        '(max-width: 1100px), (orientation: portrait)':
+          grid-template-columns: '100%'
+          grid-template-areas: 'main'
+    cards:
+      - !include 'views/main.yaml'
+      - !include 'popup/popup.yaml'
+
+  - type: 'custom:grid-layout'
+    title: 'Esszimmer'
+    icon: 'mdi:sofa'
+    path: 'Esszimmer'
+    layout:
+      grid-template-columns: '1fr 1fr'
+      grid-template-rows: 'min-content'
+      grid-template-areas: |
+        "esszimmer popup"
+      mediaquery:
+        '(max-width: 1100px), (orientation: portrait)':
+          grid-template-columns: '100%'
+          grid-template-areas: 'esszimmer'
+    cards:
+      - !include 'views/esszimmer.yaml'
+      - !include 'popup/popup.yaml'
+
+  - type: 'custom:grid-layout'
+    title: 'Küche'
+    icon: 'mdi:sofa'
+    path: 'Kueche'
+    layout:
+      grid-template-columns: '1fr 1fr'
+      grid-template-rows: 'min-content'
+      grid-template-areas: |
+        "kueche popup"
+      mediaquery:
+        '(max-width: 1100px), (orientation: portrait)':
+          grid-template-columns: '100%'
+          grid-template-areas: 'kueche'
+    cards:
+      - !include 'views/kueche.yaml'
+      - !include 'popup/popup.yaml'
