@@ -1,0 +1,12 @@
+- id: '1674252935683'
+  name: Test Szene
+  entities:
+    siren.flur_siren:
+      available_tones:
+      - ding
+      - motion
+      attribution: Data provided by Ring.com
+      friendly_name: Flur Siren
+      supported_features: 5
+      state: unknown
+  metadata: {}
