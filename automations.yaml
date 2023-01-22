@@ -7,21 +7,27 @@
       motion_entity: binary_sensor.hue_motion_sensor_3_flur_motion
       light_target:
         area_id:
-        - flur
-        - bad
-        - kuche
+          - flur
+          - bad
+          - kuche
 - id: '1674387650518'
   alias: Wohnzimmerlicht an (Schalter)
   description: ''
   trigger:
-  - platform: event
-    event_type: PRESS_SHORT
-    event_data:
+    - platform: device
+      device_id: 7079a11ea5591a7dedce42d708f00e22
+      domain: bosch_shc
+      type: PRESS_SHORT
       subtype: UPPER_BUTTON
   condition: []
   action:
-  - service: light.turn_on
-    data: {}
-    target:
-      area_id: wohnzimmer
+    - type: turn_on
+      entity_id: light.hue_lightstrip_plus_1
+      domain: light
+    - type: turn_on
+      entity_id: light.wohnzimmer_gross
+      domain: light
+    - type: turn_on
+      entity_id: light.wohnzimmer_klein
+      domain: light
   mode: single

@@ -9,6 +9,20 @@ frontend:
 tts:
   - platform: google_translate
 
+#waste_collection_schedule:
+#  sources:
+#    - name: abfall_io
+#      args:
+#        key: !secret waste_collection_key
+#        f_id_kommune: !secret waste_collection_kommune
+#        f_id_bezirk: !secret waste_collection_bezirk
+#        f_id_strasse: !secret waste_collection_strasse
+#        f_id_strasse_hnr: !secret waste_collection_hnr
+#        f_abfallarten:
+#          - 66
+#          - 177
+#          - 951
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
