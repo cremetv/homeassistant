@@ -12,24 +12,13 @@ layout:
     '(max-width: 800px)':
       grid-tempalte-columns: '1fr 1fr'
       grid-template-areas: |
-        "livingroom livingroom"
-        "kitchen    kitchen"
-        "bad        bad"
-        "flur       flur"
+        "tablet klingel"
+        "msflur mskueche"
+        "msbad  ."
 view_layout:
   grid-area: 'battery'
 
 cards:
-  - view_layout:
-      grid-area: 'tablet'
-    type: 'custom:button-card'
-    template: card_battery
-    entity: sensor.creme_tab_a7_battery_level
-    variables:
-      ulm_card_battery_battery_level_danger: 30
-      ulm_card_battery_battery_level_warning: 80
-      ulm_card_battery_name: Tablet
-
   - view_layout:
       grid-area: 'klingel'
     type: 'custom:button-card'
@@ -39,6 +28,16 @@ cards:
       ulm_card_battery_battery_level_danger: 30
       ulm_card_battery_battery_level_warning: 80
       ulm_card_battery_name: Haustür Klingel
+
+  - view_layout:
+      grid-area: 'tablet'
+    type: 'custom:button-card'
+    template: card_battery
+    entity: sensor.creme_tab_a7_battery_level
+    variables:
+      ulm_card_battery_battery_level_danger: 30
+      ulm_card_battery_battery_level_warning: 80
+      ulm_card_battery_name: Tablet
 
   - view_layout:
       grid-area: 'mskueche'
