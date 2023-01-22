@@ -21,11 +21,33 @@ view_layout:
 
 cards:
   - view_layout:
+    type: "vertical-stack"
       grid-area: 'livingroom'
-    type: 'custom:button-card'
-    template: card_battery
-    entity: sensor.creme_tab_a7_battery_level
-    variables:
-      ulm_card_battery_battery_level_danger: 30
-      ulm_card_battery_battery_level_warning: 80
-      ulm_card_battery_name: Tablet
+    cards:
+      - type: 'custom:button-card'
+        template: card_battery
+        entity: sensor.creme_tab_a7_battery_level
+        variables:
+          ulm_card_battery_battery_level_danger: 30
+          ulm_card_battery_battery_level_warning: 80
+          ulm_card_battery_name: Tablet
+
+      - type: 'custom:button-card'
+        template: card_battery
+        entity: sensor.hue_motion_sensor_1_kuche_battery
+        variables:
+          ulm_card_battery_battery_level_danger: 30
+          ulm_card_battery_battery_level_warning: 80
+          ulm_card_battery_name: Motion Sensor Küche
+
+  - view_layout:
+    type: "vertical-stack"
+      grid-area: 'flur'
+    cards:
+      - type: 'custom:button-card'
+        template: card_battery
+        entity: sensor.hue_motion_sensor_3_flur_battery
+        variables:
+          ulm_card_battery_battery_level_danger: 30
+          ulm_card_battery_battery_level_warning: 80
+          ulm_card_battery_name: Motion Sensor Flur
