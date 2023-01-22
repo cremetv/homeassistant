@@ -5,6 +5,7 @@ layout:
   # Tablet portrait
   grid-template-columns: '1fr 1fr 1fr 1fr'
   grid-template-areas: |
+    "title title title title"
     "tablet klingel  .     ."
     "msflur mskueche msbad ."
   mediaquery:
@@ -12,6 +13,7 @@ layout:
     '(max-width: 800px)':
       grid-tempalte-columns: '1fr 1fr'
       grid-template-areas: |
+        "title title"
         "tablet klingel"
         "msflur mskueche"
         "msbad  ."
@@ -19,6 +21,12 @@ view_layout:
   grid-area: 'battery'
 
 cards:
+  - view_layout:
+      grid-area: 'title'
+    type: 'custom:button-card'
+    template: 'card_title'
+    name: 'Batterie Status'
+
   - view_layout:
       grid-area: 'tablet'
     type: 'custom:button-card'
