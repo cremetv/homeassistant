@@ -1,1 +1,27 @@
-[]
+- id: '1674384218356'
+  alias: Motion Sensor test
+  description: ''
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.hue_motion_sensor_3_flur_motion
+      light_target:
+        area_id:
+        - flur
+        - bad
+        - kuche
+- id: '1674387650518'
+  alias: Wohnzimmerlicht an (Schalter)
+  description: ''
+  trigger:
+  - platform: event
+    event_type: PRESS_SHORT
+    event_data:
+      subtype: UPPER_BUTTON
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      area_id: wohnzimmer
+  mode: single
