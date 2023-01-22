@@ -5,8 +5,8 @@ layout:
   # Tablet portrait
   grid-template-columns: '1fr 1fr 1fr 1fr'
   grid-template-areas: |
-    "livingroom livingroom kitchen kitchen"
-    "bad        bad        flur    flur"
+    "tablet klingel  .     ."
+    "msflur mskueche msbad ."
   mediaquery:
     # Mobile
     '(max-width: 800px)':
@@ -21,33 +21,51 @@ view_layout:
 
 cards:
   - view_layout:
-    type: "vertical-stack"
-      grid-area: 'livingroom'
-    cards:
-      - type: 'custom:button-card'
-        template: card_battery
-        entity: sensor.creme_tab_a7_battery_level
-        variables:
-          ulm_card_battery_battery_level_danger: 30
-          ulm_card_battery_battery_level_warning: 80
-          ulm_card_battery_name: Tablet
-
-      - type: 'custom:button-card'
-        template: card_battery
-        entity: sensor.hue_motion_sensor_1_kuche_battery
-        variables:
-          ulm_card_battery_battery_level_danger: 30
-          ulm_card_battery_battery_level_warning: 80
-          ulm_card_battery_name: Motion Sensor Küche
+      grid-area: 'tablet'
+    type: 'custom:button-card'
+    template: card_battery
+    entity: sensor.creme_tab_a7_battery_level
+    variables:
+      ulm_card_battery_battery_level_danger: 30
+      ulm_card_battery_battery_level_warning: 80
+      ulm_card_battery_name: Tablet
 
   - view_layout:
-    type: "vertical-stack"
-      grid-area: 'flur'
-    cards:
-      - type: 'custom:button-card'
-        template: card_battery
-        entity: sensor.hue_motion_sensor_3_flur_battery
-        variables:
-          ulm_card_battery_battery_level_danger: 30
-          ulm_card_battery_battery_level_warning: 80
-          ulm_card_battery_name: Motion Sensor Flur
+      grid-area: 'klingel'
+    type: 'custom:button-card'
+    template: card_battery
+    entity: sensor.haustur_battery
+    variables:
+      ulm_card_battery_battery_level_danger: 30
+      ulm_card_battery_battery_level_warning: 80
+      ulm_card_battery_name: Haustür Klingel
+
+  - view_layout:
+      grid-area: 'mskueche'
+    type: 'custom:button-card'
+    template: card_battery
+    entity: sensor.hue_motion_sensor_1_kuche_battery
+    variables:
+      ulm_card_battery_battery_level_danger: 30
+      ulm_card_battery_battery_level_warning: 80
+      ulm_card_battery_name: Motion Sensor Küche
+
+  - view_layout:
+      grid-area: 'msflur'
+    type: 'custom:button-card'
+    template: card_battery
+    entity: sensor.hue_motion_sensor_3_flur_battery
+    variables:
+      ulm_card_battery_battery_level_danger: 30
+      ulm_card_battery_battery_level_warning: 80
+      ulm_card_battery_name: Motion Sensor Flur
+
+  - view_layout:
+      grid-area: 'msbad'
+    type: 'custom:button-card'
+    template: card_battery
+    entity: sensor.hue_motion_sensor_2_bad_battery
+    variables:
+      ulm_card_battery_battery_level_danger: 30
+      ulm_card_battery_battery_level_warning: 80
+      ulm_card_battery_name: Motion Sensor Bad
