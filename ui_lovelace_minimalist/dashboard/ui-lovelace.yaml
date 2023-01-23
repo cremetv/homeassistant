@@ -1,8 +1,44 @@
 ---
-button_card_templates: !include_dir_merge_named '../../custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/'
+button_card_templates: !include_dir_merge_named "../../custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/"
 
-title: 'Home'
-theme: 'minimalist-desktop'
-background: 'var(--background-image)'
-# views: !include_dir_merge_list "views/"
-views: !include view/home.yaml
+title: "Home"
+background: "var(--background-image)"
+views:
+  - !include "views/home.yaml"
+  - !include "views/house.yaml"
+  - !include "views/lights.yaml"
+  - !include "views/weather.yaml"
+  - !include "views/battery.yaml"
+
+  - !include "views/wohnzimmer.yaml"
+  - !include "views/kuche.yaml"
+  - !include "views/bad.yaml"
+# - title: "Home"
+#   icon: "mdi:home"
+#   path: "home"
+#   cards:
+#     - !include "views/home.yaml"
+
+# - title: "Haus"
+#   icon: "mdi:home"
+#   path: "house"
+#   cards:
+#     - !include "views/house.yaml"
+
+# - title: "Lichter"
+#   icon: "mdi:lightbulb"
+#   path: "lights"
+#   cards:
+#     - !include "views/lights.yaml"
+
+# - title: "Wetter"
+#   icon: "mdi:weather-sunny"
+#   path: "weather"
+#   cards:
+#     - !include "views/weather.yaml"
+
+# - title: "Batterie"
+#   icon: "mdi:battery"
+#   path: "battery"
+#   cards:
+#     - !include "views/battery.yaml"

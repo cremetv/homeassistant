@@ -1,0 +1,187 @@
+title: "Home"
+icon: "mdi:home"
+path: "home"
+type: "custom:grid-layout"
+layout:
+  grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
+  grid-tempalte-rows: "min-content"
+  grid-template-areas: |
+    ". welcome      welcome     welcome     welcome     welcome     welcome     ."
+    ". person1      person1     person1     person2     person2     person2     ."
+    ". room-title   room-title  room-title  room-title  room-title  room-title  ."
+    ". room-wz      room-wz     room-kit    room-kit    room-bad    room-bad    ."
+  mediaquery:
+    "(max-width: 500px)":
+      grid-template-columns: "100%"
+      grid-template-areas: |
+        "welcome"
+        "person1"
+        "person2"
+        "room-title"
+        "room-wz"
+        "room-kit"
+        "room-bad"
+cards:
+  ####################
+  # WELCOME CARD
+  ####################
+  - type: "custom:button-card"
+    template: "card_esh_welcome"
+    view_layout:
+      grid-area: "welcome"
+    triggers_update: "input_boolean.minimalist_dropdown"
+    variables:
+      ulm_card_esh_welcome_collapse: input_boolean.minimalist_dropdown
+      ulm_weather: "weather.openweathermap"
+      entity_1:
+        nav: "house"
+        icon: "mdi:home"
+        name: "Haus"
+        color: "blue"
+      entity_2:
+        nav: "lights"
+        icon: "mdi:lightbulb"
+        name: "Lichter"
+        color: "yellow"
+      entity_3:
+        nav: "weather"
+        icon: "mdi:weather-sunny"
+        name: "Wetter"
+        color: "green"
+      entity_4:
+        nav: "battery"
+        icon: "mdi:battery"
+        name: "Batterie"
+        color: "purple"
+
+  ####################
+  # PERSONS
+  ####################
+  - type: "custom:button-card"
+    view_layout:
+      grid-area: "person1"
+    template: card_person
+    entity: person.marcel
+    variables:
+      ulm_card_person_entity: person.marcel
+      ulm_card_person_use_entity_picture: true
+      ulm_card_person_icon: mdi:face-man
+      ulm_card_person_battery: sensor.oneplus_9_battery_level
+  - type: "custom:button-card"
+    view_layout:
+      grid-area: "person2"
+    template: card_person
+    entity: person.maja
+    variables:
+      ulm_card_person_entity: person.maja
+      ulm_card_person_use_entity_picture: true
+      ulm_card_person_icon: mdi:face-woman
+
+  ####################
+  # ROOMS TITLE
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Räume"
+    view_layout:
+      grid-area: "room-title"
+
+  ####################
+  # ROOMS
+  ####################
+  # WOHNZIMMER
+  - type: "custom:button-card"
+    view_layout:
+      grid-area: "room-wz"
+    template:
+      - card_room
+      - green_no_state
+    name: Wohnzimmer
+    entity: sensor.heizung_temperature
+    icon: mdi:sofa
+    tap_action:
+      action: navigate
+      navigation_path: "wohnzimmer"
+    variables:
+      label_use_temperature: true
+      label_use_brightness: false
+      entity_1:
+        entity_id: light.wohnzimmer
+        templates:
+          - yellow_on
+        tap_action:
+          action: toggle
+      entity_2:
+        entity_id: climate.heizung
+        templates:
+          - yellow_on
+        tap_action:
+          action: toggle
+      entity_3:
+        entity_id: switch.tv_socket
+        templates:
+          - green_on
+        icon: mdi:television
+        tap_action:
+          action: toggle
+      entity_4:
+        entity_id: switch.pc_socket_1
+        templates:
+          - green_on
+        icon: mdi:laptop
+        tap_action:
+          action: toggle
+  # KÜCHE
+  - type: "custom:button-card"
+    view_layout:
+      grid-area: "room-kit"
+    template:
+      - card_room
+      - red_no_state
+    name: Küche
+    entity: sensor.kuche_temperature
+    icon: mdi:knife
+    tap_action:
+      action: navigate
+      navigation_path: "kuche"
+    variables:
+      label_use_temperature: true
+      label_use_brightness: false
+      entity_1:
+        entity_id: light.kuche
+        templates:
+          - yellow_on
+        tap_action:
+          action: toggle
+      entity_2:
+        entity_id: switch.zwischenstecker_kompakt
+        templates:
+          - green_on
+        tap_action:
+          action: toggle
+      # entity_2:
+      #   entity_id: sensor.kuche_temperature
+  # BAD
+  - type: "custom:button-card"
+    view_layout:
+      grid-area: "room-bad"
+    template:
+      - card_room
+      - blue_no_state
+    name: Bathroom
+    entity: sensor.bad_temperature
+    icon: mdi:shower-head
+    tap_action:
+      action: navigate
+      navigation_path: "bad"
+    variables:
+      label_use_temperature: true
+      label_use_brightness: false
+      entity_1:
+        entity_id: light.bad
+        templates:
+          - yellow_on
+        tap_action:
+          action: toggle
+      # entity_2:
+      #   entity_id: sensor.bad_temperature
