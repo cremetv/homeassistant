@@ -1,12 +1,213 @@
 title: "Batterie"
 icon: "mdi:battery"
 path: "battery"
-cards:
-  - type: "custom:button-card"
-    template: chip_back
-    variables:
-      ulm_chip_back_path: /ui-lovelace-minimalist/home
+type: "custom:grid-layout"
+layout:
+  # DESKTOP
+  grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
+  grid-template-rows: "min-content"
+  grid-template-areas: |
+    ".  nav             nav             nav             nav             nav             nav   ."
 
+    ".  devices-title   devices-title   devices-title   devices-title   devices-title   devices-title   ."
+    ".  device-tablet   device-tablet   device-phone    device-phone    device-3        device-3        ."
+
+    ".  sensors-title   sensors-title   sensors-title   sensors-title   sensors-title   sensors-title   ."
+    ".  sensor-kuche    sensor-kuche    sensor-flur     sensor-flur     sensor-bad      sensor-bad      ."
+
+    ".  cams-title      cams-title      cams-title      cams-title      cams-title      cams-title      ."
+    ".  cam-door        cam-door        cam-bird        cam-bird        cam-3           cam-3           ."
+
+    ".  thermos-title   thermos-title   thermos-title   thermos-title   thermos-title   thermos-title   ."
+    ".  thermo-1        thermo-1        thermo-2        thermo-2        thermo-3        thermo-3        ."
+  mediaquery:
+    # SMARTPHONE
+    "(max-width: 500px)":
+      grid-template-columns: "auto 1fr"
+      grid-template-areas: |
+        "nav            nav"
+
+        "devices-title  devices-title"
+        "device-tablet  device-tablet"
+        "device-phone   device-phone"
+
+        "sensors-title  sensors-title"
+        "sensor-kuche   sensor-kuche"
+        "sensor-flur    sensor-flur"
+        "sensor-bad     sensor-bad"
+
+        "cams-title     cams-title"
+        "cam-door       cam-door"
+        "cam-bird       cam-bird"
+
+        "thermos-title  thermos-title"
+        "thermo-1       thermo-1"
+        "thermo-2       thermo-2"
+        "thermo-3       thermo-3"
+    # TABLET
+    "(max-width: 1350px)":
+      grid-template-columns: "0 repeat(6, 1fr) 0"
+cards:
+  - type: "horizontal-stack"
+    view_layout:
+      grid-area: "nav"
+    styles:
+      align-items: "center"
+    cards:
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: home
+
+      - type: "custom:button-card"
+        template: "card_title"
+        name: "Batterie Status"
+        styles:
+          card:
+            - margin-top: "0px"
+
+  ####################
+  # DEVICES
+  ####################
   - type: "custom:button-card"
     template: "card_title"
-    name: "Batterie Status"
+    name: "Geräte"
+    view_layout:
+      grid-area: "devices-title"
+
+  - type: "custom:button-card"
+    template: card_battery
+    entity: sensor.samsung_tablet_battery_level
+    view_layout:
+      grid-area: "device-tablet"
+    variables:
+      ulm_card_battery_charger_type_entity_id: sensor.samsung_tablet_battery_level
+      ulm_card_battery_battery_level_danger: 20
+      ulm_card_battery_battery_level_warning: 70
+      ulm_card_battery_name: Tablet
+
+  - type: "custom:button-card"
+    template: card_battery
+    entity: sensor.oneplus_9_battery_level
+    view_layout:
+      grid-area: "device-phone"
+    variables:
+      ulm_card_battery_charger_type_entity_id: sensor.oneplus_9_battery_level
+      ulm_card_battery_battery_level_danger: 20
+      ulm_card_battery_battery_level_warning: 70
+      ulm_card_battery_name: OnePlus
+
+  ####################
+  # MOTION SENSORS
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Bewegungsmelder"
+    view_layout:
+      grid-area: "sensors-title"
+
+  - type: "custom:button-card"
+    template: card_battery
+    entity: sensor.hue_motion_sensor_1_kuche_battery
+    view_layout:
+      grid-area: "sensor-kuche"
+    variables:
+      ulm_card_battery_charger_type_entity_id: sensor.hue_motion_sensor_1_kuche_battery
+      ulm_card_battery_battery_level_danger: 20
+      ulm_card_battery_battery_level_warning: 70
+      ulm_card_battery_name: Küche
+
+  - type: "custom:button-card"
+    template: card_battery
+    entity: sensor.hue_motion_sensor_3_flur_battery
+    view_layout:
+      grid-area: "sensor-flur"
+    variables:
+      ulm_card_battery_charger_type_entity_id: sensor.hue_motion_sensor_3_flur_battery
+      ulm_card_battery_battery_level_danger: 20
+      ulm_card_battery_battery_level_warning: 70
+      ulm_card_battery_name: Flur
+
+  - type: "custom:button-card"
+    template: card_battery
+    entity: sensor.hue_motion_sensor_2_bad_battery
+    view_layout:
+      grid-area: "sensor-bad"
+    variables:
+      ulm_card_battery_charger_type_entity_id: sensor.hue_motion_sensor_2_bad_battery
+      ulm_card_battery_battery_level_danger: 20
+      ulm_card_battery_battery_level_warning: 70
+      ulm_card_battery_name: Bad
+
+  ####################
+  # CAMERAS
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Kameras"
+    view_layout:
+      grid-area: "cams-title"
+
+  - type: "custom:button-card"
+    template: card_battery
+    entity: sensor.haustur_battery
+    view_layout:
+      grid-area: "cam-door"
+    variables:
+      ulm_card_battery_charger_type_entity_id: sensor.haustur_battery
+      ulm_card_battery_battery_level_danger: 20
+      ulm_card_battery_battery_level_warning: 70
+      ulm_card_battery_name: Haustür Klingel
+
+  - type: "custom:button-card"
+    template: card_battery
+    entity: sensor.vogelcam_battery
+    view_layout:
+      grid-area: "cam-bird"
+    variables:
+      ulm_card_battery_charger_type_entity_id: sensor.vogelcam_battery
+      ulm_card_battery_battery_level_danger: 20
+      ulm_card_battery_battery_level_warning: 70
+      ulm_card_battery_name: Vogelcam
+
+  ####################
+  # THERMOSTATS
+  ####################
+  # - type: "custom:button-card"
+  #   template: "card_title"
+  #   name: "Thermostate"
+  #   view_layout:
+  #     grid-area: "thermos-title"
+
+  # - type: "custom:button-card"
+  #   template: card_battery
+  #   entity: binary_sensor.va0059450112_battery_state
+  #   view_layout:
+  #     grid-area: "thermo-1"
+  #   variables:
+  #     ulm_card_battery_charger_type_entity_id: binary_sensor.va0059450112_battery_state
+  #     ulm_card_battery_battery_level_danger: 20
+  #     ulm_card_battery_battery_level_warning: 70
+  #     ulm_card_battery_name: "1 ?"
+
+  # - type: "custom:button-card"
+  #   template: card_battery
+  #   entity: binary_sensor.va3808171776_battery_state
+  #   view_layout:
+  #     grid-area: "thermo-2"
+  #   variables:
+  #     ulm_card_battery_charger_type_entity_id: binary_sensor.va3808171776_battery_state
+  #     ulm_card_battery_battery_level_danger: 20
+  #     ulm_card_battery_battery_level_warning: 70
+  #     ulm_card_battery_name: "2 ?"
+
+  # - type: "custom:button-card"
+  #   template: card_battery
+  #   entity: binary_sensor.va4203356928_battery_state
+  #   view_layout:
+  #     grid-area: "thermo-3"
+  #   variables:
+  #     ulm_card_battery_charger_type_entity_id: binary_sensor.va4203356928_battery_state
+  #     ulm_card_battery_battery_level_danger: 20
+  #     ulm_card_battery_battery_level_warning: 70
+  #     ulm_card_battery_name: "3 ?"

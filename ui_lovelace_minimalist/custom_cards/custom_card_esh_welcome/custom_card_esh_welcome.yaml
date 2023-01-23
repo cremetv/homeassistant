@@ -48,7 +48,7 @@ card_esh_welcome:
             if(variables.ulm_card_esh_welcome_collapse && states[variables.ulm_card_esh_welcome_collapse].state == 'on'){
               return "\'item1\' \'item2\' ";
             } else {
-              return "\'item1\' \'item2\' \'item3\'";
+              return "\'item1\' \'item2\' \'item3\' \'item4\'";
             }
           ]]]
       - grid-template-columns: "1fr"
@@ -98,6 +98,15 @@ card_esh_welcome:
     item2:
       card:
         type: "custom:button-card"
+        template: custom_card_nik_clock
+        styles:
+          card:
+            - padding: "0"
+            - margin-top: "2rem"
+            - "--mdc-ripple-press-opacity": 0 # prevent click animation
+    item3:
+      card:
+        type: "custom:button-card"
         show_icon: false
         show_label: false
         show_name: true
@@ -108,20 +117,24 @@ card_esh_welcome:
             var time = today.getHours()
             let welcome = '';
             if (time >= '18'){
-              welcome = variables.ulm_evening;
+              // welcome = variables.ulm_evening;
+              welcome = 'Nabend';
             } else if (time >= '12'){
-              welcome = variables.ulm_afternoon;
+              // welcome = variables.ulm_afternoon;
+              welcome = 'Hi';
             } else if (time >= '5'){
-              welcome = variables.ulm_morning;
+              // welcome = variables.ulm_morning;
+              welcome = 'Moin';
             } else {
-              welcome = variables.ulm_hello;
+              // welcome = variables.ulm_hello;
+              welcome = 'Hi';
             }
-            return welcome + ', ' + '   <br>' + user.name + '!';
+            return welcome + ', ' + user.name + '!';
           ]]]
         styles:
           name:
             - align-self: "start"
-            - justify-self: "start"
+            - justify-self: "center"
             - font-weight: "bold"
             - font-size: "24px"
             - margin-left: "16px"
@@ -135,7 +148,7 @@ card_esh_welcome:
             - padding-bottom: "8px"
             - cursor: "default"
             - "--mdc-ripple-press-opacity": 0 # prevent click animation
-    item3:
+    item4:
       card:
         type: "custom:button-card"
         template: "card_esh_welcome_nav"

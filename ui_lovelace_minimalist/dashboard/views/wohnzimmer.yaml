@@ -1,12 +1,246 @@
 title: "Wohnzimmer"
 icon: "mdi:sofa"
 path: "wohnzimmer"
+type: "custom:grid-layout"
+layout:
+  # DESKTOP
+  grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
+  grid-template-rows: "min-content"
+  grid-template-areas: |
+    ".      nav           nav           nav           nav           nav           nav           ."
+
+    ".      temp          temp          temp          humid         humid         humid         ."
+
+    ".      lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
+    ".      lights-1      lights-1      lights-2      lights-2      lights-3      lights-3      ."
+    ".      lights-4      lights-4      lights-4      lights-5      lights-5      lights-5      ."
+
+    ".      sockets-title sockets-title sockets-title sockets-title sockets-title sockets-title ."
+    ".      socket-tv     socket-tv     socket-pc      socket-pc      socket-grow   socket-raspi  ."
+
+    ".      devices-title devices-title devices-title devices-title devices-title devices-title ."
+    ".      device-tablet device-tablet device-phone  device-phone  device-x      device-x ."
+  mediaquery:
+    # SMARTPHONE
+    "(max-width: 500px)":
+      grid-template-columns: "auto 1fr"
+      grid-template-areas: |
+        "nav            nav"
+
+        "temp           temp"
+        "humid          humid"
+
+        "lights-title   lights-title"
+        "lights-1       lights-1"
+        "lights-2       lights-2"
+        "lights-3       lights-3"
+        "lights-4       lights-4"
+        "lights-5       lights-5"
+
+        "sockets-title  sockets-title"
+        "socket-tv      socket-tv"
+        "socket-pc      socket-pc"
+        "socket-grow    socket-grow"
+        "socket-raspi   socket-raspi"
+
+        "devices-title  devices-title"
+        "device-tablet  device-tablet"
+        "device-phone   device-phone"
+    # TABLET
+    "(max-width: 1350px)":
+      grid-template-columns: "0 repeat(6, 1fr) 0"
 cards:
+  ####################
+  # NAV
+  ####################
+  - type: "horizontal-stack"
+    view_layout:
+      grid-area: "nav"
+    styles:
+      align-items: "center"
+    cards:
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: home
+
+      - type: "custom:button-card"
+        template: "card_title"
+        name: "Wohnzimmer"
+        styles:
+          card:
+            - margin-top: "0px"
+
+  ####################
+  # TEMP
+  ####################
   - type: "custom:button-card"
-    template: chip_back
+    template: card_graph
+    entity: sensor.heizung_temperature
+    view_layout:
+      grid-area: "temp"
     variables:
-      ulm_chip_back_path: /ui-lovelace-minimalist/home
+      ulm_card_graph_color: "var(--google-blue)"
+      ulm_card_graph_name: Temperatur
+      ulm_card_graph_entity: sensor.heizung_temperature
+      ulm_card_graph_type: fill
+      ulm_card_graph_hours: 24
+      ulm_card_graph_group_by: interval
 
   - type: "custom:button-card"
+    template: card_graph
+    entity: sensor.heizung_humidity
+    view_layout:
+      grid-area: "humid"
+    variables:
+      ulm_card_graph_color: "var(--google-red)"
+      ulm_card_graph_name: Feuchtigkeit
+      ulm_card_graph_entity: sensor.heizung_humidity
+      ulm_card_graph_type: fill
+      ulm_card_graph_hours: 24
+      ulm_card_graph_group_by: interval
+
+  ####################
+  # LIGHTS
+  ####################
+  - type: "custom:button-card"
     template: "card_title"
-    name: "Wohnzimmer"
+    name: "Lichter"
+    view_layout:
+      grid-area: "lights-title"
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.hue_lightstrip_plus_1
+    view_layout:
+      grid-area: "lights-1"
+    variables:
+      ulm_card_light_name: Lightstrip
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.wohnzimmer_gross
+    view_layout:
+      grid-area: "lights-2"
+    variables:
+      ulm_card_light_name: Groß
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.wohnzimmer_klein
+    view_layout:
+      grid-area: "lights-3"
+    variables:
+      ulm_card_light_name: Klein
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.led_streifen
+    view_layout:
+      grid-area: "lights-4"
+    variables:
+      ulm_card_light_name: LED Streifen
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lightbars
+    view_layout:
+      grid-area: "lights-5"
+    variables:
+      ulm_card_light_name: Lightbars
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  ####################
+  # SOCKETS
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Stecker"
+    view_layout:
+      grid-area: "sockets-title"
+
+  - type: "custom:button-card"
+    template: card_power_outlet
+    entity: switch.pc_socket_1
+    view_layout:
+      grid-area: "socket-pc"
+    variables:
+      # ulm_card_power_outlet_consumption_sensor: sensor.power_outlet_livingroom_consumption
+      ulm_card_power_outlet_name: PC
+      ulm_card_power_outlet_icon: mdi:power-plug
+
+  - type: "custom:button-card"
+    template: card_power_outlet
+    entity: switch.tv_socket
+    view_layout:
+      grid-area: "socket-tv"
+    variables:
+      # ulm_card_power_outlet_consumption_sensor: sensor.power_outlet_livingroom_consumption
+      ulm_card_power_outlet_name: TV
+      ulm_card_power_outlet_icon: mdi:power-plug
+
+  - type: "custom:button-card"
+    template: card_power_outlet
+    entity: switch.raspi_socket
+    view_layout:
+      grid-area: "socket-raspi"
+    variables:
+      # ulm_card_power_outlet_consumption_sensor: sensor.power_outlet_livingroom_consumption
+      ulm_card_power_outlet_name: RasPi
+      ulm_card_power_outlet_icon: mdi:power-plug
+
+  - type: "custom:button-card"
+    template: card_power_outlet
+    entity: switch.growlight_2_socket_1
+    view_layout:
+      grid-area: "socket-grow"
+    variables:
+      # ulm_card_power_outlet_consumption_sensor: sensor.power_outlet_livingroom_consumption
+      ulm_card_power_outlet_name: Growlight
+      ulm_card_power_outlet_icon: mdi:power-plug
+
+  ####################
+  # DEVICES
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Geräte"
+    view_layout:
+      grid-area: "devices-title"
+
+  - type: "custom:button-card"
+    template: "custom_card_vncntdev_device_tracker"
+    entity: device_tracker.samsung_tablet
+    view_layout:
+      grid-area: "device-tablet"
+    variables:
+      custom_card_vncntdev_device_tracker_icon: mdi:tablet
+      custom_card_vncntdev_device_tracker_name: "Tablet"
+
+  - type: "custom:button-card"
+    template: "custom_card_vncntdev_device_tracker"
+    entity: device_tracker.oneplus_9
+    view_layout:
+      grid-area: "device-phone"
+    variables:
+      custom_card_vncntdev_device_tracker_icon: mdi:cellphone
+      custom_card_vncntdev_device_tracker_name: "OnePlus 9"

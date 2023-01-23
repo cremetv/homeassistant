@@ -3,24 +3,45 @@ icon: "mdi:home"
 path: "home"
 type: "custom:grid-layout"
 layout:
+  # DESKTOP
   grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
-  grid-tempalte-rows: "min-content"
+  grid-template-rows: "min-content"
   grid-template-areas: |
     ". welcome      welcome     welcome     welcome     welcome     welcome     ."
+
     ". person1      person1     person1     person2     person2     person2     ."
+
+    ". lb-title     lb-title    lb-title    lb-title    lb-title    lb-title    ."
+    ". lowbattery   lowbattery  lowbattery  lowbattery  lowbattery  lowbattery  ."
+
+    ". ctrl-title   ctrl-title  ctrl-title  ctrl-title  ctrl-title  ctrl-title  ."
+    ". ctrl-lights  ctrl-lights .           .           .           .           ."
+
     ". room-title   room-title  room-title  room-title  room-title  room-title  ."
     ". room-wz      room-wz     room-kit    room-kit    room-bad    room-bad    ."
   mediaquery:
+    # SMARTPHONE
     "(max-width: 500px)":
       grid-template-columns: "100%"
       grid-template-areas: |
         "welcome"
+
         "person1"
         "person2"
+
+        "lb-title"
+        "lowbattery"
+
+        "ctrl-title"
+        "ctrl-lights"
+
         "room-title"
         "room-wz"
         "room-kit"
         "room-bad"
+    # TABLET
+    "(max-width: 1350px)":
+      grid-template-columns: "0 repeat(6, 1fr) 0"
 cards:
   ####################
   # WELCOME CARD
@@ -78,6 +99,57 @@ cards:
       ulm_card_person_icon: mdi:face-woman
 
   ####################
+  # LOW BATTERY
+  ####################
+  # - type: "custom:button-card"
+  #   template: "card_title"
+  #   name: "Niedriger Batterie Stand"
+  #   view_layout:
+  #     grid-area: "lb-title"
+
+  # - type: "vertical-stack"
+  #   view_layout:
+  #     grid-area: "lowbattery"
+  #   cards:
+  #     - type: "custom:auto-entities"
+  #       card:
+  #         type: "grid"
+  #         columns: 2
+  #         square: false
+  #       card_param: "cards"
+  #       sort:
+  #         count: 4
+  #       filter:
+  #         include:
+  #           - attributes:
+  #               unit_of_measurement: "%"
+  #               device_class: "battery"
+  #             options:
+  #               type: "custom:button-card"
+  #               template: "card_battery"
+  #               variables:
+  #                 ulm_card_battery_battery_state_entity_id: "this.entity_id"
+  #                 ulm_card_battery_battery_level_danger: 20
+  #                 ulm_card_battery_battery_level_warning: 70
+
+  ####################
+  # CONTROL
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Steuerung"
+    view_layout:
+      grid-area: "ctrl-title"
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.alle_lichter
+    view_layout:
+      grid-area: "ctrl-lights"
+    variables:
+      ulm_card_light_enable_horizontal: true
+
+  ####################
   # ROOMS TITLE
   ####################
   - type: "custom:button-card"
@@ -111,25 +183,25 @@ cards:
           - yellow_on
         tap_action:
           action: toggle
+      # entity_2:
+      #   entity_id: climate.heizung
+      #   templates:
+      #     - yellow_on
+      #   tap_action:
+      #     action: toggle
       entity_2:
-        entity_id: climate.heizung
-        templates:
-          - yellow_on
-        tap_action:
-          action: toggle
-      entity_3:
         entity_id: switch.tv_socket
         templates:
           - green_on
-        icon: mdi:television
         tap_action:
+          icon: mdi:television
           action: toggle
-      entity_4:
+      entity_3:
         entity_id: switch.pc_socket_1
         templates:
           - green_on
-        icon: mdi:laptop
         tap_action:
+          icon: mdi:laptop
           action: toggle
   # KÜCHE
   - type: "custom:button-card"
@@ -168,7 +240,7 @@ cards:
     template:
       - card_room
       - blue_no_state
-    name: Bathroom
+    name: Bad
     entity: sensor.bad_temperature
     icon: mdi:shower-head
     tap_action:

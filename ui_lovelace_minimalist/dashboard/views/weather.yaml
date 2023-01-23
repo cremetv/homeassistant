@@ -1,12 +1,75 @@
 title: "Wetter"
 icon: "mdi:weather-sunny"
 path: "weather"
+type: "custom:grid-layout"
+layout:
+  # DESKTOP
+  grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
+  grid-template-rows: "min-content 1fr auto"
+  grid-template-areas: |
+    ".  nav   nav   nav   nav           nav           nav           ."
+    ".  sun   sun   sun   pollen        pollen        pollen        ."
+  mediaquery:
+    # SMARTPHONE
+    "(max-width: 500px)":
+      grid-template-columns: "auto 1fr"
+      grid-template-areas: |
+        "nav            nav"
+        "sun            sun"
+        "pollen         pollen"
+    # TABLET
+    "(max-width: 1350px)":
+      grid-template-columns: "0 repeat(6, 1fr) 0"
 cards:
-  - type: "custom:button-card"
-    template: chip_back
-    variables:
-      ulm_chip_back_path: /ui-lovelace-minimalist/home
+  ####################
+  # NAV
+  ####################
+  - type: "horizontal-stack"
+    view_layout:
+      grid-area: "nav"
+    styles:
+      align-items: "center"
+    cards:
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: home
 
-  - type: "custom:button-card"
-    template: "card_title"
-    name: "Wetter"
+      - type: "custom:button-card"
+        template: "card_title"
+        name: "Wetter"
+        styles:
+          card:
+            - margin-top: "0px"
+
+  ####################
+  # SUN
+  ####################
+  - type: custom:button-card
+    template: custom_card_httpedo13_sun
+    view_layout:
+      grid-area: "sun"
+    # variables:
+    # showAzimuth: true
+    # showElevation: true
+
+  ####################
+  # POLLEN
+  ####################
+  - type: "vertical-stack"
+    view_layout:
+      grid-area: "pollen"
+    cards:
+      - type: "custom:button-card"
+        template: "card_title"
+        name: "Pollen"
+        styles:
+          card:
+            - align-self: "end"
+
+      - type: "custom:button-card"
+        template: custom_card_wsly_pollen
+        variables:
+          custom_card_wsly_pollen_tree: sensor.tomorrow_io_home_tree_pollen_index
+          custom_card_wsly_pollen_grass: sensor.tomorrow_io_home_grass_pollen_index
+          custom_card_wsly_pollen_weed: sensor.tomorrow_io_home_weed_pollen_index

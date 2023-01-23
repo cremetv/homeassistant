@@ -1,12 +1,27 @@
 title: "Lichter"
 icon: "mdi:lightbulb"
 path: "lights"
+type: "custom:grid-layout"
+layout:
+  grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
+  grid-template-rows: "min-content"
+  grid-template-areas: |
+    "back   title         title         title         title         title         title         ."
+  mediaquery:
+    "(max-width: 500px)":
+      grid-template-columns: "auto 1fr"
+      grid-template-areas: |
+        "back         title"
 cards:
   - type: "custom:button-card"
     template: chip_back
     variables:
-      ulm_chip_back_path: /ui-lovelace-minimalist/home
+      ulm_chip_back_path: home
+    view_layout:
+      grid-area: "back"
 
   - type: "custom:button-card"
     template: "card_title"
     name: "Lichter"
+    view_layout:
+      grid-area: "title"

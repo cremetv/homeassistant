@@ -23,6 +23,36 @@ tts:
 #          - 177
 #          - 951
 
+waste_collection_schedule:
+  sources:
+    - name: abfall_io
+      args:
+        key: !secret waste_collection_key
+        f_id_kommune: !secret waste_collection_kommune
+        f_id_bezirk: !secret waste_collection_bezirk
+        f_id_strasse: !secret waste_collection_strasse
+        f_id_strasse_hnr: !secret waste_collection_hnr
+        f_abfallarten:
+          - 66 # Gelber Sack
+          - 177 # Graue Tonne
+          - 951 # Grüne Tonne
+          - 190 # Strauchgutabfuhr
+          - 33 # Sperrmüll
+          - 347 # Problemabfallsammeltermine
+      # customize:
+      #   - type: TYPE
+      #     alias: ALIAS
+      #     show: SHOW
+      #     icon: ICON
+      #     picture: PICTURE
+      #     use_dedicated_calendar: USE_DEDICATED_CALENDAR
+      #     dedicated_calendar_title: DEDICATED_CALENDAR_TITLE
+      # calendar_title: CALENDAR_TITLE
+  # fetch_time: FETCH_TIME
+  # random_fetch_time_offset: RANDOM_FETCH_TIME_OFFSET
+  # day_switch_time: DAY_SWITCH_TIME
+  # separator: SEPARATOR
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
