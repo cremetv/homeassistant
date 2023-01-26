@@ -10,6 +10,7 @@ layout:
     ".  nav           nav           nav           nav           nav           nav           ."
 
     ".  temp          temp          temp          humid         humid         humid         ."
+    ".  thermo        thermo        thermo        thermo        thermo        thermo        ."
 
     ".  .             shower        shower        shower        shower        .             ."
     ".  lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
@@ -23,6 +24,7 @@ layout:
 
         "temp           temp"
         "humid          humid"
+        "thermo         thermo"
 
         "shower         shower"
         "lights-title   lights-title"
@@ -82,16 +84,29 @@ cards:
       ulm_card_graph_group_by: interval
 
   ####################
+  # THERMOSTAT
+  ####################
+  - type: "custom:button-card"
+    template: card_thermostat
+    entity: climate.thermostat_bad
+    view_layout:
+      grid-area: "thermo"
+    variables:
+      ulm_card_thermostat_name: "Thermostat"
+      ulm_card_thermostat_enable_controls: true
+      ulm_card_thermostat_enable_popup: true
+      ulm_card_thermostat_enable_horizontal: true
+
+  ####################
   # LIGHTS
   ####################
   - type: "custom:button-card"
-    template: card_binary_sensor
-    variables:
-      ulm_card_binary_sensor_name: "Duschen"
-      ulm_card_binary_sensor_icon: mdi:shower-head
+    template: card_input_boolean
     entity: input_boolean.duschen
     view_layout:
       grid-area: "shower"
+    variables:
+      ulm_card_input_boolean_name: Duschen
     styles:
       card:
         - padding: "36px 12px"

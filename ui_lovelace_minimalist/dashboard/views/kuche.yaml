@@ -10,6 +10,7 @@ layout:
     ".  nav           nav           nav           nav           nav           nav           ."
 
     ".  temp          temp          temp          humid         humid         humid         ."
+    ".  thermo        thermo        thermo        thermo        thermo        thermo        ."
 
     ".  lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
     ".  lights-1      lights-1      lights-1      lights-2      lights-2      lights-2      ."
@@ -25,6 +26,7 @@ layout:
 
         "temp           temp"
         "humid          humid"
+        "thermo         thermo"
 
         "lights-title   lights-title"
         "lights-1       lights-1"
@@ -85,6 +87,20 @@ cards:
       ulm_card_graph_type: fill
       ulm_card_graph_hours: 24
       ulm_card_graph_group_by: interval
+
+  ####################
+  # THERMOSTAT
+  ####################
+  - type: "custom:button-card"
+    template: card_thermostat
+    entity: climate.thermostat_kuche
+    view_layout:
+      grid-area: "thermo"
+    variables:
+      ulm_card_thermostat_name: "Thermostat"
+      ulm_card_thermostat_enable_controls: true
+      ulm_card_thermostat_enable_popup: true
+      ulm_card_thermostat_enable_horizontal: true
 
   ####################
   # LIGHTS
