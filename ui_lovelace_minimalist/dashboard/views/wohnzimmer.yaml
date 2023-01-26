@@ -7,19 +7,19 @@ layout:
   grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
   grid-template-rows: "min-content"
   grid-template-areas: |
-    ".      nav           nav           nav           nav           nav           nav           ."
+    ".  nav           nav           nav           nav           nav           nav           ."
 
-    ".      temp          temp          temp          humid         humid         humid         ."
+    ".  temp          temp          temp          humid         humid         humid         ."
 
-    ".      lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
-    ".      lights-1      lights-1      lights-2      lights-2      lights-3      lights-3      ."
-    ".      lights-4      lights-4      lights-4      lights-5      lights-5      lights-5      ."
+    ".  lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
+    ".  lights-1      lights-1      lights-2      lights-2      lights-3      lights-3      ."
+    ".  lights-4      lights-4      lights-4      lights-5      lights-5      lights-5      ."
 
-    ".      sockets-title sockets-title sockets-title sockets-title sockets-title sockets-title ."
-    ".      socket-tv     socket-tv     socket-pc      socket-pc      socket-grow   socket-raspi  ."
+    ".  sockets-title sockets-title sockets-title sockets-title sockets-title sockets-title ."
+    ".  socket-tv     socket-tv     socket-pc      socket-pc      socket-grow   socket-raspi  ."
 
-    ".      devices-title devices-title devices-title devices-title devices-title devices-title ."
-    ".      device-tablet device-tablet device-phone  device-phone  device-x      device-x ."
+    ".  devices-title devices-title devices-title devices-title devices-title devices-title ."
+    ".  device-tablet device-tablet device-phone  device-phone  device-x      device-x ."
   mediaquery:
     # SMARTPHONE
     "(max-width: 500px)":
@@ -76,26 +76,26 @@ cards:
   ####################
   - type: "custom:button-card"
     template: card_graph
-    entity: sensor.heizung_temperature
+    entity: sensor.thermostat_wohnzimmer_temperature
     view_layout:
       grid-area: "temp"
     variables:
-      ulm_card_graph_color: "var(--google-blue)"
+      ulm_card_graph_color: "var(--google-red)"
       ulm_card_graph_name: Temperatur
-      ulm_card_graph_entity: sensor.heizung_temperature
+      ulm_card_graph_entity: sensor.thermostat_wohnzimmer_temperature
       ulm_card_graph_type: fill
       ulm_card_graph_hours: 24
       ulm_card_graph_group_by: interval
 
   - type: "custom:button-card"
     template: card_graph
-    entity: sensor.heizung_humidity
+    entity: sensor.thermostat_wohnzimmer_humidity
     view_layout:
       grid-area: "humid"
     variables:
-      ulm_card_graph_color: "var(--google-red)"
+      ulm_card_graph_color: "var(--google-blue)"
       ulm_card_graph_name: Feuchtigkeit
-      ulm_card_graph_entity: sensor.heizung_humidity
+      ulm_card_graph_entity: sensor.thermostat_wohnzimmer_humidity
       ulm_card_graph_type: fill
       ulm_card_graph_hours: 24
       ulm_card_graph_group_by: interval
@@ -111,7 +111,7 @@ cards:
 
   - type: "custom:button-card"
     template: card_light
-    entity: light.hue_lightstrip_plus_1
+    entity: light.lamp_lightstrip
     view_layout:
       grid-area: "lights-1"
     variables:
@@ -123,7 +123,7 @@ cards:
 
   - type: "custom:button-card"
     template: card_light
-    entity: light.wohnzimmer_gross
+    entity: light.lamp_wohnzimmer_gross
     view_layout:
       grid-area: "lights-2"
     variables:
@@ -135,7 +135,7 @@ cards:
 
   - type: "custom:button-card"
     template: card_light
-    entity: light.wohnzimmer_klein
+    entity: light.lamp_wohnzimmer_klein
     view_layout:
       grid-area: "lights-3"
     variables:
@@ -147,7 +147,7 @@ cards:
 
   - type: "custom:button-card"
     template: card_light
-    entity: light.led_streifen
+    entity: light.lamp_led_streifen
     view_layout:
       grid-area: "lights-4"
     variables:
@@ -159,7 +159,7 @@ cards:
 
   - type: "custom:button-card"
     template: card_light
-    entity: light.lightbars
+    entity: light.lamp_lightbars
     view_layout:
       grid-area: "lights-5"
     variables:
@@ -180,7 +180,7 @@ cards:
 
   - type: "custom:button-card"
     template: card_power_outlet
-    entity: switch.pc_socket_1
+    entity: switch.pc_socket
     view_layout:
       grid-area: "socket-pc"
     variables:
@@ -210,7 +210,7 @@ cards:
 
   - type: "custom:button-card"
     template: card_power_outlet
-    entity: switch.growlight_2_socket_1
+    entity: switch.growlight_2_socket
     view_layout:
       grid-area: "socket-grow"
     variables:

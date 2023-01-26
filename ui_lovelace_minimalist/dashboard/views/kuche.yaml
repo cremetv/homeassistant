@@ -3,25 +3,136 @@ icon: "mdi:knife"
 path: "kuche"
 type: "custom:grid-layout"
 layout:
+  # DESKTOP
   grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
   grid-template-rows: "min-content"
   grid-template-areas: |
-    "back   title         title         title         title         title         title         ."
+    ".  nav           nav           nav           nav           nav           nav           ."
+
+    ".  temp          temp          temp          humid         humid         humid         ."
+
+    ".  lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
+    ".  lights-1      lights-1      lights-1      lights-2      lights-2      lights-2      ."
+
+    ".  sockets-title sockets-title sockets-title sockets-title sockets-title sockets-title ."
+    ".  socket-1      socket-1      socket-2      socket-2      socket-3      socket-3      ."
   mediaquery:
+    # SMARTPHONE
     "(max-width: 500px)":
       grid-template-columns: "auto 1fr"
       grid-template-areas: |
-        "back         title"
+        "nav            nav"
+
+        "temp           temp"
+        "humid          humid"
+
+        "lights-title   lights-title"
+        "lights-1       lights-1"
+        "lights-2       lights-2"
+
+        "sockets-title  sockets-title"
+        "socket-1       socket-1"
+    # TABLET
+    "(max-width: 1350px)":
+      grid-template-columns: "0 repeat(6, 1fr) 0"
 cards:
-  - type: "custom:button-card"
-    template: chip_back
-    variables:
-      ulm_chip_back_path: home
+  ####################
+  # NAV
+  ####################
+  - type: "horizontal-stack"
     view_layout:
-      grid-area: "back"
+      grid-area: "nav"
+    styles:
+      align-items: "center"
+    cards:
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: home
+
+      - type: "custom:button-card"
+        template: "card_title"
+        name: "Küche"
+        styles:
+          card:
+            - margin-top: "0px"
+
+  ####################
+  # TEMP
+  ####################
+  - type: "custom:button-card"
+    template: card_graph
+    entity: sensor.thermostat_kuche_temperature
+    view_layout:
+      grid-area: "temp"
+    variables:
+      ulm_card_graph_color: "var(--google-red)"
+      ulm_card_graph_name: Temperatur
+      ulm_card_graph_entity: sensor.thermostat_kuche_temperature
+      ulm_card_graph_type: fill
+      ulm_card_graph_hours: 24
+      ulm_card_graph_group_by: interval
 
   - type: "custom:button-card"
-    template: "card_title"
-    name: "Küche"
+    template: card_graph
+    entity: sensor.thermostat_kuche_humidity
     view_layout:
-      grid-area: "title"
+      grid-area: "humid"
+    variables:
+      ulm_card_graph_color: "var(--google-blue)"
+      ulm_card_graph_name: Feuchtigkeit
+      ulm_card_graph_entity: sensor.thermostat_kuche_humidity
+      ulm_card_graph_type: fill
+      ulm_card_graph_hours: 24
+      ulm_card_graph_group_by: interval
+
+  ####################
+  # LIGHTS
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Lichter"
+    view_layout:
+      grid-area: "lights-title"
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_kuche_decke
+    view_layout:
+      grid-area: "lights-1"
+    variables:
+      ulm_card_light_name: Decke
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_kuche_fenster
+    view_layout:
+      grid-area: "lights-2"
+    variables:
+      ulm_card_light_name: Fenster
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  ####################
+  # SOCKETS
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Stecker"
+    view_layout:
+      grid-area: "sockets-title"
+
+  - type: "custom:button-card"
+    template: card_power_outlet
+    entity: switch.zwischenstecker_kompakt
+    view_layout:
+      grid-area: "socket-1"
+    variables:
+      ulm_card_power_outlet_name: Zwischenstecker
+      ulm_card_power_outlet_icon: mdi:power-plug

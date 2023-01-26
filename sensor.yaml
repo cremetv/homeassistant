@@ -1,9 +1,2 @@
-# GitHub Integration
-- platform: github
-  access_token: !secret github_token
-  repositories:
-    - path: "cremetv/homeassistant"
-      name: creme's Homeassistant Config
-
 - platform: waste_collection_schedule
-  name: abfall
+  name: "abfall"

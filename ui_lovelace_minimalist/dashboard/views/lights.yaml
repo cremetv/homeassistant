@@ -3,25 +3,304 @@ icon: "mdi:lightbulb"
 path: "lights"
 type: "custom:grid-layout"
 layout:
+  # DESKTOP
   grid-template-columns: "auto repeat(6, minmax(50px, 150px)) auto"
   grid-template-rows: "min-content"
   grid-template-areas: |
-    "back   title         title         title         title         title         title         ."
+    ".  nav             nav             nav             nav             nav             nav           ."
+
+    ".  wohnz-title     wohnz-title     wohnz-title     wohnz-title     wohnz-title     wohnz-title   ."
+    ".  wohnz-all       wohnz-all       wohnz-all       wohnz-all       wohnz-all       wohnz-all     ."
+    ".  wohnz-1         wohnz-1         wohnz-2         wohnz-2         wohnz-3         wohnz-3       ."
+    ".  wohnz-4         wohnz-4         wohnz-5         wohnz-5         wohnz-6         wohnz-6       ."
+    ".  wohnz-scenes    wohnz-scenes    wohnz-scenes    wohnz-scenes    wohnz-scenes    wohnz-scenes  ."
+
+    ".  kuche-title     kuche-title     kuche-title     kuche-title     kuche-title     kuche-title   ."
+    ".  kuche-all       kuche-all       kuche-all       kuche-all       kuche-all       kuche-all     ."
+    ".  kuche-1         kuche-1         kuche-2         kuche-2         kuche-3         kuche-3       ."
+
+    ".  bad-title       bad-title       bad-title       bad-title       bad-title       bad-title     ."
+    ".  bad-all         bad-all         bad-all         bad-all         bad-all         bad-all       ."
+    ".  bad-1           bad-1           bad-2           bad-2           bad-3           bad-3         ."
+
+    ".  flur-title      flur-title      flur-title      flur-title      flur-title      flur-title    ."
+    ".  flur-all        flur-all        flur-all        flur-all        flur-all        flur-all      ."
+    ".  flur-1          flur-1          flur-2          flur-2          flur-3          flur-3        ."
   mediaquery:
+    # SMARTPHONE
     "(max-width: 500px)":
       grid-template-columns: "auto 1fr"
       grid-template-areas: |
-        "back         title"
-cards:
-  - type: "custom:button-card"
-    template: chip_back
-    variables:
-      ulm_chip_back_path: home
-    view_layout:
-      grid-area: "back"
+        "nav nav"
 
+        "wohnz-title  wohnz-title"
+        "wohnz-all    wohnz-all"
+        "wohnz-1      wohnz-1"
+        "wohnz-2      wohnz-2"
+        "wohnz-3      wohnz-3"
+        "wohnz-4      wohnz-4"
+        "wohnz-5      wohnz-5"
+        "wohnz-scenes wohnz-scenes"
+
+        "kuche-title  kuche-title"
+        "kuche-all    kuche-all"
+        "kuche-1      kuche-1"
+        "kuche-2      kuche-2"
+
+        "bad-title    bad-title"
+        "bad-all      bad-all"
+        "bad-1        bad-1"
+
+        "flur-title   flur-title"
+        "flur-all     flur-all"
+        "flur-1       flur-1"
+    # TABLET
+    "(max-width: 1350px)":
+      grid-template-columns: "0 repeat(6, 1fr) 0"
+cards:
+  ####################
+  # NAV
+  ####################
+  - type: "horizontal-stack"
+    view_layout:
+      grid-area: "nav"
+    styles:
+      align-items: "center"
+    cards:
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: home
+
+      - type: "custom:button-card"
+        template: "card_title"
+        name: "Lichter"
+        styles:
+          card:
+            - margin-top: "0px"
+
+  ####################
+  # WOHNZIMMER
+  ####################
   - type: "custom:button-card"
     template: "card_title"
-    name: "Lichter"
+    name: "Wohnzimmer"
     view_layout:
-      grid-area: "title"
+      grid-area: "wohnz-title"
+
+  - type: "custom:button-card"
+    template: card_binary_sensor
+    entity: light.alle_lichter_wohnzimmer
+    variables:
+      ulm_card_binary_sensor_name: "Alle Lichter"
+    view_layout:
+      grid-area: "wohnz-all"
+    styles:
+      card:
+        - padding: "24px 12px"
+      grid:
+        - display: "flex"
+        - justify-content: "center"
+        - align-items: "center"
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_wohnzimmer_gross
+    view_layout:
+      grid-area: "wohnz-1"
+    variables:
+      ulm_card_light_name: Gross
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_wohnzimmer_klein
+    view_layout:
+      grid-area: "wohnz-2"
+    variables:
+      ulm_card_light_name: Klein
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_lightstrip
+    view_layout:
+      grid-area: "wohnz-3"
+    variables:
+      ulm_card_light_name: Lightstrip
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_led_streifen
+    view_layout:
+      grid-area: "wohnz-4"
+    variables:
+      ulm_card_light_name: LED Streifen
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_lightbars
+    view_layout:
+      grid-area: "wohnz-5"
+    variables:
+      ulm_card_light_name: Lightbars
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  # SCENES
+  - type: "custom:button-card"
+    template: "card_scenes_welcome"
+    view_layout:
+      grid-area: "wohnz-scenes"
+    variables:
+      entity_1:
+        entity_id: "scene.shishabar_wohnzimmer"
+        icon: "mdi:smoke"
+        name: "Shishabar"
+        color: "purple"
+      entity_2:
+        entity_id: "scene.chill_wohnzimmer"
+        icon: "mdi:bottle-wine"
+        name: "Chill"
+        color: "orange"
+      entity_3:
+        entity_id: "scene.fokus_wohnzimmer"
+        icon: "mdi:lightning-bolt"
+        name: "Fokus"
+        color: "white"
+
+  ####################
+  # KÜCHE
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Küche"
+    view_layout:
+      grid-area: "kuche-title"
+
+  - type: "custom:button-card"
+    template: card_binary_sensor
+    entity: light.alle_lichter_kuche
+    variables:
+      ulm_card_binary_sensor_name: "Alle Lichter"
+    view_layout:
+      grid-area: "kuche-all"
+    styles:
+      card:
+        - padding: "24px 12px"
+      grid:
+        - display: "flex"
+        - justify-content: "center"
+        - align-items: "center"
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_kuche_decke
+    view_layout:
+      grid-area: "kuche-1"
+    variables:
+      ulm_card_light_name: Decke
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_kuche_fenster
+    view_layout:
+      grid-area: "kuche-2"
+    variables:
+      ulm_card_light_name: Fenster
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  ####################
+  # BAD
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Bad"
+    view_layout:
+      grid-area: "bad-title"
+
+  - type: "custom:button-card"
+    template: card_binary_sensor
+    entity: light.alle_lichter_bad
+    variables:
+      ulm_card_binary_sensor_name: "Alle Lichter"
+    view_layout:
+      grid-area: "bad-all"
+    styles:
+      card:
+        - padding: "24px 12px"
+      grid:
+        - display: "flex"
+        - justify-content: "center"
+        - align-items: "center"
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_bad
+    view_layout:
+      grid-area: "bad-1"
+    variables:
+      ulm_card_light_name: Decke
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true
+
+  ####################
+  # FLUR
+  ####################
+  - type: "custom:button-card"
+    template: "card_title"
+    name: "Flur"
+    view_layout:
+      grid-area: "flur-title"
+
+  - type: "custom:button-card"
+    template: card_binary_sensor
+    entity: light.alle_lichter_flur
+    variables:
+      ulm_card_binary_sensor_name: "Alle Lichter"
+    view_layout:
+      grid-area: "flur-all"
+    styles:
+      card:
+        - padding: "24px 12px"
+      grid:
+        - display: "flex"
+        - justify-content: "center"
+        - align-items: "center"
+
+  - type: "custom:button-card"
+    template: card_light
+    entity: light.lamp_flur
+    view_layout:
+      grid-area: "flur-1"
+    variables:
+      ulm_card_light_name: Decke
+      ulm_card_light_enable_slider: true
+      ulm_card_light_enable_color: true
+      ulm_card_light_force_background_color: true
+      ulm_card_light_enable_collapse: true

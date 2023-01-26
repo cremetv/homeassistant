@@ -10,3 +10,372 @@
       supported_features: 5
       state: unknown
   metadata: {}
+- id: '1674687035211'
+  name: Shishabar Wohnzimmer
+  entities:
+    light.lamp_wohnzimmer_gross:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Wohnzimmer groß
+      supported_features: 40
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 309.857
+      - 54.902
+      rgb_color:
+      - 255
+      - 115
+      - 232
+      xy_color:
+      - 0.3974
+      - 0.2097
+      state: 'on'
+    light.lamp_wohnzimmer_klein:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Wohnzimmer klein
+      supported_features: 40
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 178.286
+      - 68.627
+      rgb_color:
+      - 80
+      - 255
+      - 250
+      xy_color:
+      - 0.1709
+      - 0.3481
+      state: 'on'
+    light.lamp_led_streifen:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 9009
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      rate_limit_total: 100
+      rate_limit_remaining: -13525
+      rate_limit_reset_seconds: -1674687460.44
+      rate_limit_reset: '1970-01-01T01:00:00'
+      rate_limit_on: 5
+      manufacturer: Govee
+      model: H6163
+      friendly_name: Lampe Led Streifen
+      supported_features: 19
+      color_mode: hs
+      brightness: 199
+      hs_color:
+      - 180
+      - 72.157
+      rgb_color:
+      - 70
+      - 255
+      - 255
+      xy_color:
+      - 0.166
+      - 0.341
+      state: 'on'
+    light.lamp_lightstrip:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Lightstrip
+      supported_features: 40
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 178.286
+      - 68.627
+      rgb_color:
+      - 80
+      - 255
+      - 250
+      xy_color:
+      - 0.1709
+      - 0.3481
+      state: 'on'
+    light.lamp_lightbars:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 9009
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      friendly_name: Lampe Lightbars
+      supported_features: 19
+      state: unavailable
+  icon: mdi:smoke
+  metadata: {}
+- id: '1674687550644'
+  name: Fokus Wohnzimmer
+  entities:
+    light.lamp_wohnzimmer_gross:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Wohnzimmer groß
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 254
+      - 250
+      xy_color:
+      - 0.326
+      - 0.333
+      color_temp_kelvin: 6535
+      color_temp: 153
+      state: 'on'
+    light.lamp_wohnzimmer_klein:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Wohnzimmer klein
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 254
+      - 250
+      xy_color:
+      - 0.326
+      - 0.333
+      color_temp_kelvin: 6535
+      color_temp: 153
+      state: 'on'
+    light.lamp_lightstrip:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Lightstrip
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 254
+      - 250
+      xy_color:
+      - 0.326
+      - 0.333
+      color_temp_kelvin: 6535
+      color_temp: 153
+      state: 'on'
+    light.lamp_led_streifen:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 9009
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      rate_limit_total: 100
+      rate_limit_remaining: -13549
+      rate_limit_reset_seconds: -1674687550.48
+      rate_limit_reset: '1970-01-01T01:00:00'
+      rate_limit_on: 5
+      manufacturer: Govee
+      model: H6163
+      friendly_name: Lampe Led Streifen
+      supported_features: 19
+      color_mode: hs
+      brightness: 255
+      hs_color:
+      - 30
+      - 7.059
+      rgb_color:
+      - 255
+      - 245
+      - 236
+      xy_color:
+      - 0.34
+      - 0.337
+      state: 'on'
+    light.lamp_lightbars:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 9009
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      friendly_name: Lampe Lightbars
+      supported_features: 19
+      state: unavailable
+  icon: mdi:lightning-bolt
+  metadata: {}
+- id: '1674687929149'
+  name: Chill Wohnzimmer
+  entities:
+    light.lamp_wohnzimmer_gross:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Wohnzimmer groß
+      supported_features: 40
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 280
+      - 10.588
+      rgb_color:
+      - 246
+      - 228
+      - 255
+      xy_color:
+      - 0.3239
+      - 0.3
+      state: 'on'
+    light.lamp_wohnzimmer_klein:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Wohnzimmer klein
+      supported_features: 40
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 22.703
+      - 29.02
+      rgb_color:
+      - 255
+      - 209
+      - 181
+      xy_color:
+      - 0.4042
+      - 0.3538
+      state: 'on'
+    light.lamp_lightstrip:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Lampe Lightstrip
+      supported_features: 40
+      color_mode: xy
+      brightness: 165
+      hs_color:
+      - 209.434
+      - 20.784
+      rgb_color:
+      - 202
+      - 229
+      - 255
+      xy_color:
+      - 0.2747
+      - 0.3015
+      state: 'on'
+    light.lamp_led_streifen:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 9009
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      friendly_name: Lampe Led Streifen
+      supported_features: 19
+      color_mode: hs
+      brightness: 178
+      hs_color:
+      - 27
+      - 7.843
+      rgb_color:
+      - 255
+      - 244
+      - 235
+      xy_color:
+      - 0.341
+      - 0.337
+      rate_limit_total: 100
+      rate_limit_remaining: -13659
+      rate_limit_reset_seconds: -1674687941.43
+      rate_limit_reset: '1970-01-01T01:00:00'
+      rate_limit_on: 5
+      manufacturer: Govee
+      model: H6163
+      state: 'on'
+    light.lamp_lightbars:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 9009
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      friendly_name: Lampe Lightbars
+      supported_features: 19
+      state: unavailable
+  icon: mdi:bottle-wine
+  metadata: {}

@@ -19,6 +19,8 @@ layout:
 
     ". room-title   room-title  room-title  room-title  room-title  room-title  ."
     ". room-wz      room-wz     room-kit    room-kit    room-bad    room-bad    ."
+
+    ". vogelcam     vogelcam    vogelcam    vogelcam    vogelcam    vogelcam    ."
   mediaquery:
     # SMARTPHONE
     "(max-width: 500px)":
@@ -39,6 +41,8 @@ layout:
         "room-wz"
         "room-kit"
         "room-bad"
+
+        "vogelcam"
     # TABLET
     "(max-width: 1350px)":
       grid-template-columns: "0 repeat(6, 1fr) 0"
@@ -150,7 +154,7 @@ cards:
       ulm_card_light_enable_horizontal: true
 
   ####################
-  # ROOMS TITLE
+  # ROOMS
   ####################
   - type: "custom:button-card"
     template: "card_title"
@@ -158,9 +162,6 @@ cards:
     view_layout:
       grid-area: "room-title"
 
-  ####################
-  # ROOMS
-  ####################
   # WOHNZIMMER
   - type: "custom:button-card"
     view_layout:
@@ -169,7 +170,7 @@ cards:
       - card_room
       - green_no_state
     name: Wohnzimmer
-    entity: sensor.heizung_temperature
+    entity: sensor.thermostat_wohnzimmer_temperature
     icon: mdi:sofa
     tap_action:
       action: navigate
@@ -178,17 +179,11 @@ cards:
       label_use_temperature: true
       label_use_brightness: false
       entity_1:
-        entity_id: light.wohnzimmer
+        entity_id: light.alle_lichter_wohnzimmer
         templates:
           - yellow_on
         tap_action:
           action: toggle
-      # entity_2:
-      #   entity_id: climate.heizung
-      #   templates:
-      #     - yellow_on
-      #   tap_action:
-      #     action: toggle
       entity_2:
         entity_id: switch.tv_socket
         templates:
@@ -197,7 +192,7 @@ cards:
           icon: mdi:television
           action: toggle
       entity_3:
-        entity_id: switch.pc_socket_1
+        entity_id: switch.pc_socket
         templates:
           - green_on
         tap_action:
@@ -211,7 +206,7 @@ cards:
       - card_room
       - red_no_state
     name: Küche
-    entity: sensor.kuche_temperature
+    entity: sensor.thermostat_kuche_temperature
     icon: mdi:knife
     tap_action:
       action: navigate
@@ -220,7 +215,7 @@ cards:
       label_use_temperature: true
       label_use_brightness: false
       entity_1:
-        entity_id: light.kuche
+        entity_id: light.alle_lichter_kuche
         templates:
           - yellow_on
         tap_action:
@@ -231,8 +226,6 @@ cards:
           - green_on
         tap_action:
           action: toggle
-      # entity_2:
-      #   entity_id: sensor.kuche_temperature
   # BAD
   - type: "custom:button-card"
     view_layout:
@@ -241,7 +234,7 @@ cards:
       - card_room
       - blue_no_state
     name: Bad
-    entity: sensor.bad_temperature
+    entity: sensor.thermostat_bad_temperature
     icon: mdi:shower-head
     tap_action:
       action: navigate
@@ -250,10 +243,22 @@ cards:
       label_use_temperature: true
       label_use_brightness: false
       entity_1:
-        entity_id: light.bad
+        entity_id: light.alle_lichter_bad
         templates:
           - yellow_on
         tap_action:
           action: toggle
-      # entity_2:
-      #   entity_id: sensor.bad_temperature
+
+  ####################
+  # VOGELCAM
+  ####################
+  - type: "custom:button-card"
+    entity: "camera.vogelcam"
+    template: "custom_card_camera"
+    show_icon: false #True if you set ulm_custom_card_camera_title: true
+    view_layout:
+      grid-area: "vogelcam"
+    variables:
+      ulm_custom_card_camera_title: true
+      ulm_custom_card_camera_name: "Vogelcam"
+      # ulm_custom_card_camera_label: "..."

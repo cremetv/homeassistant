@@ -1,33 +1,77 @@
-- id: '1674384218356'
-  alias: Motion Sensor test
-  description: ''
-  use_blueprint:
-    path: homeassistant/motion_light.yaml
-    input:
-      motion_entity: binary_sensor.hue_motion_sensor_3_flur_motion
-      light_target:
-        area_id:
-          - flur
-          - bad
-          - kuche
 - id: '1674387650518'
   alias: Wohnzimmerlicht an (Schalter)
   description: ''
   trigger:
-    - platform: device
-      device_id: 7079a11ea5591a7dedce42d708f00e22
-      domain: bosch_shc
-      type: PRESS_SHORT
-      subtype: UPPER_BUTTON
+  - platform: device
+    device_id: 7079a11ea5591a7dedce42d708f00e22
+    domain: bosch_shc
+    type: PRESS_SHORT
+    subtype: UPPER_BUTTON
   condition: []
   action:
-    - type: turn_on
-      entity_id: light.hue_lightstrip_plus_1
-      domain: light
-    - type: turn_on
-      entity_id: light.wohnzimmer_gross
-      domain: light
-    - type: turn_on
-      entity_id: light.wohnzimmer_klein
-      domain: light
+  - type: turn_on
+    entity_id: light.hue_lightstrip_plus_1
+    domain: light
+  - type: turn_on
+    entity_id: light.wohnzimmer_gross
+    domain: light
+  - type: turn_on
+    entity_id: light.wohnzimmer_klein
+    domain: light
+  mode: single
+- id: '1674642706176'
+  alias: Küche Zwischenstecker ein
+  description: Schaltet Zwischenstecker in der Küche ein, sobald Bewegung erkannt
+    wird
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.hue_motion_sensor_1_kuche_motion
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: ffd5ad08ce2c07c488df3e3dd8311085
+    entity_id: switch.zwischenstecker_kompakt
+    domain: switch
+  mode: single
+- id: '1674642899449'
+  alias: Küche Zwischenstecker aus
+  description: Schalte den Zwischenstecker aus, wenn keine Bewegung mehr erkennbar
+    ist und keine Geräte Energie verbrauchen.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.hue_motion_sensor_1_kuche_motion
+    to: 'off'
+    from: 'on'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.zwischenstecker_kompakt_power
+    below: 2
+  action:
+  - type: turn_off
+    device_id: ffd5ad08ce2c07c488df3e3dd8311085
+    entity_id: switch.zwischenstecker_kompakt
+    domain: switch
+  mode: single
+- id: '1674643721606'
+  alias: Schalte alle Lichter aus
+  description: Schaltet alle Lichter im Haus aus wenn ich das Haus verlasse
+  trigger:
+  - platform: geo_location
+    source: person.marcel
+    zone: zone.home
+    event: leave
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter
   mode: single
