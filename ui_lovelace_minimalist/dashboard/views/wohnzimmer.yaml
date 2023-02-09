@@ -13,8 +13,10 @@ layout:
     ".  thermo        thermo        thermo        thermo        thermo        thermo        ."
 
     ".  lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
+    ".  wohnz-all     wohnz-all     wohnz-all     wohnz-all     wohnz-all     wohnz-all     ."
     ".  lights-1      lights-1      lights-2      lights-2      lights-3      lights-3      ."
     ".  lights-4      lights-4      lights-4      lights-5      lights-5      lights-5      ."
+    ".  lights-scenes lights-scenes lights-scenes lights-scenes lights-scenes lights-scenes ."
 
     ".  sockets-title sockets-title sockets-title sockets-title sockets-title sockets-title ."
     ".  socket-tv     socket-tv     socket-pc      socket-pc      socket-grow   socket-raspi  ."
@@ -33,11 +35,13 @@ layout:
         "thermo         thermo"
 
         "lights-title   lights-title"
+        "lights-all     lights-all"
         "lights-1       lights-1"
         "lights-2       lights-2"
         "lights-3       lights-3"
         "lights-4       lights-4"
         "lights-5       lights-5"
+        "lights-scenes  lights-scenes"
 
         "sockets-title  sockets-title"
         "socket-tv      socket-tv"
@@ -125,6 +129,8 @@ cards:
     view_layout:
       grid-area: "lights-title"
 
+  - !include "../cards/lights/wohnzimmer_all.yaml"
+
   - type: "custom:button-card"
     template: card_light
     entity: light.lamp_lightstrip
@@ -184,6 +190,28 @@ cards:
       ulm_card_light_enable_color: true
       ulm_card_light_force_background_color: true
       ulm_card_light_enable_collapse: true
+
+  # SCENES
+  - type: "custom:button-card"
+    template: "card_scenes_welcome"
+    view_layout:
+      grid-area: "lights-scenes"
+    variables:
+      entity_1:
+        entity_id: "scene.shishabar_wohnzimmer"
+        icon: "mdi:smoke"
+        name: "Shishabar"
+        color: "purple"
+      entity_2:
+        entity_id: "scene.chill_wohnzimmer"
+        icon: "mdi:bottle-wine"
+        name: "Chill"
+        color: "orange"
+      entity_3:
+        entity_id: "scene.fokus_wohnzimmer"
+        icon: "mdi:lightning-bolt"
+        name: "Fokus"
+        color: "white"
 
   ####################
   # SOCKETS

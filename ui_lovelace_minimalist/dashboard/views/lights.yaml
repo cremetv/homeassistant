@@ -9,6 +9,7 @@ layout:
   grid-template-areas: |
     ".  nav             nav             nav             nav             nav             nav           ."
 
+    ".  wohnzimmer_lights wohnzimmer_lights wohnzimmer_lights wohnzimmer_lights wohnzimmer_lights wohnzimmer_lights"
     ".  wohnz-title     wohnz-title     wohnz-title     wohnz-title     wohnz-title     wohnz-title   ."
     ".  wohnz-all       wohnz-all       wohnz-all       wohnz-all       wohnz-all       wohnz-all     ."
     ".  wohnz-1         wohnz-1         wohnz-2         wohnz-2         wohnz-3         wohnz-3       ."
@@ -33,6 +34,7 @@ layout:
       grid-template-areas: |
         "nav nav"
 
+        "wohnzimmer_lights wohnzimmer_lights"
         "wohnz-title  wohnz-title"
         "wohnz-all    wohnz-all"
         "wohnz-1      wohnz-1"
@@ -88,80 +90,67 @@ cards:
     view_layout:
       grid-area: "wohnz-title"
 
-  - type: "custom:button-card"
-    template: card_binary_sensor
-    entity: light.alle_lichter_wohnzimmer
-    variables:
-      ulm_card_binary_sensor_name: "Alle Lichter"
-    view_layout:
-      grid-area: "wohnz-all"
-    styles:
-      card:
-        - padding: "24px 12px"
-      grid:
-        - display: "flex"
-        - justify-content: "center"
-        - align-items: "center"
+  # - !include "../cards/lights/wohnzimmer_all.yaml"
 
-  - type: "custom:button-card"
-    template: card_light
-    entity: light.lamp_wohnzimmer_gross
-    view_layout:
-      grid-area: "wohnz-1"
-    variables:
-      ulm_card_light_name: Gross
-      ulm_card_light_enable_slider: true
-      ulm_card_light_enable_color: true
-      ulm_card_light_force_background_color: true
-      ulm_card_light_enable_collapse: true
+  # - type: "custom:button-card"
+  #   template: card_light
+  #   entity: light.lamp_wohnzimmer_gross
+  #   view_layout:
+  #     grid-area: "wohnz-1"
+  #   variables:
+  #     ulm_card_light_name: Gross
+  #     ulm_card_light_enable_slider: true
+  #     ulm_card_light_enable_color: true
+  #     ulm_card_light_force_background_color: true
+  #     ulm_card_light_enable_collapse: true
 
-  - type: "custom:button-card"
-    template: card_light
-    entity: light.lamp_wohnzimmer_klein
-    view_layout:
-      grid-area: "wohnz-2"
-    variables:
-      ulm_card_light_name: Klein
-      ulm_card_light_enable_slider: true
-      ulm_card_light_enable_color: true
-      ulm_card_light_force_background_color: true
-      ulm_card_light_enable_collapse: true
+  # - type: "custom:button-card"
+  #   template: card_light
+  #   entity: light.lamp_wohnzimmer_klein
+  #   view_layout:
+  #     grid-area: "wohnz-2"
+  #   variables:
+  #     ulm_card_light_name: Klein
+  #     ulm_card_light_enable_slider: true
+  #     ulm_card_light_enable_color: true
+  #     ulm_card_light_force_background_color: true
+  #     ulm_card_light_enable_collapse: true
 
-  - type: "custom:button-card"
-    template: card_light
-    entity: light.lamp_lightstrip
-    view_layout:
-      grid-area: "wohnz-3"
-    variables:
-      ulm_card_light_name: Lightstrip
-      ulm_card_light_enable_slider: true
-      ulm_card_light_enable_color: true
-      ulm_card_light_force_background_color: true
-      ulm_card_light_enable_collapse: true
+  # - type: "custom:button-card"
+  #   template: card_light
+  #   entity: light.lamp_lightstrip
+  #   view_layout:
+  #     grid-area: "wohnz-3"
+  #   variables:
+  #     ulm_card_light_name: Lightstrip
+  #     ulm_card_light_enable_slider: true
+  #     ulm_card_light_enable_color: true
+  #     ulm_card_light_force_background_color: true
+  #     ulm_card_light_enable_collapse: true
 
-  - type: "custom:button-card"
-    template: card_light
-    entity: light.lamp_led_streifen
-    view_layout:
-      grid-area: "wohnz-4"
-    variables:
-      ulm_card_light_name: LED Streifen
-      ulm_card_light_enable_slider: true
-      ulm_card_light_enable_color: true
-      ulm_card_light_force_background_color: true
-      ulm_card_light_enable_collapse: true
+  # - type: "custom:button-card"
+  #   template: card_light
+  #   entity: light.lamp_led_streifen
+  #   view_layout:
+  #     grid-area: "wohnz-4"
+  #   variables:
+  #     ulm_card_light_name: LED Streifen
+  #     ulm_card_light_enable_slider: true
+  #     ulm_card_light_enable_color: true
+  #     ulm_card_light_force_background_color: true
+  #     ulm_card_light_enable_collapse: true
 
-  - type: "custom:button-card"
-    template: card_light
-    entity: light.lamp_lightbars
-    view_layout:
-      grid-area: "wohnz-5"
-    variables:
-      ulm_card_light_name: Lightbars
-      ulm_card_light_enable_slider: true
-      ulm_card_light_enable_color: true
-      ulm_card_light_force_background_color: true
-      ulm_card_light_enable_collapse: true
+  # - type: "custom:button-card"
+  #   template: card_light
+  #   entity: light.lamp_lightbars
+  #   view_layout:
+  #     grid-area: "wohnz-5"
+  #   variables:
+  #     ulm_card_light_name: Lightbars
+  #     ulm_card_light_enable_slider: true
+  #     ulm_card_light_enable_color: true
+  #     ulm_card_light_force_background_color: true
+  #     ulm_card_light_enable_collapse: true
 
   # SCENES
   - type: "custom:button-card"

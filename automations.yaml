@@ -26,7 +26,7 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.hue_motion_sensor_1_kuche_motion
+    - binary_sensor.motion_sensor_kuche_motion
     to: 'on'
     from: 'off'
   condition: []
@@ -43,17 +43,17 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.hue_motion_sensor_1_kuche_motion
+    - binary_sensor.motion_sensor_kuche_motion
     to: 'off'
-    from: 'on'
     for:
       hours: 0
       minutes: 1
       seconds: 0
+    from: 'on'
   condition:
   - condition: numeric_state
     entity_id: sensor.zwischenstecker_kompakt_power
-    below: 2
+    below: 3
   action:
   - type: turn_off
     device_id: ffd5ad08ce2c07c488df3e3dd8311085
@@ -61,11 +61,16 @@
     domain: switch
   mode: single
 - id: '1674643721606'
-  alias: Schalte alle Lichter aus
-  description: Schaltet alle Lichter im Haus aus wenn ich das Haus verlasse
+  alias: Schalte alle Lichter aus & Heizung auf auto
+  description: Schaltet alle Lichter im Haus aus wenn ich das Haus verlasse und lass
+    alle Thermostate auf auto laufen.
   trigger:
-  - platform: geo_location
-    source: person.marcel
+  - platform: zone
+    entity_id: person.marcel
+    zone: zone.home
+    event: leave
+  - platform: zone
+    entity_id: person.maja
     zone: zone.home
     event: leave
   condition: []
@@ -74,4 +79,333 @@
     data: {}
     target:
       entity_id: light.alle_lichter
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: auto
+    target:
+      entity_id:
+      - climate.thermostat_bad
+      - climate.thermostat_kuche
+      - climate.thermostat_wohnzimmer
+  mode: single
+- id: '1674836582758'
+  alias: Bad Lichter aus
+  description: Schalte Bad Lichter aus wenn niemand duscht und keine Bewegung für
+    5min erkannt wurde
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_bad_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.duschen
+    state: 'off'
+  - condition: time
+    before: '19:00:00'
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter_bad
+  mode: single
+- id: '1674836951243'
+  alias: Küchen Lichter aus (abends)
+  description: Schalte alle Lichter abends in der Küche nach 1min ohne Bewegung aus.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_kuche_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition:
+  - condition: time
+    after: '19:00:00'
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter_kuche
+  mode: single
+- id: '1674837015605'
+  alias: Küchen Lichter aus
+  description: Schalte alle Küchenlichter nach 5min ohne Bewegung aus.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_kuche_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: time
+    before: '19:00:00'
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter_kuche
+  mode: single
+- id: '1674837111264'
+  alias: Bad Lichter aus (abends)
+  description: Schalte Bad Lichter aus wenn niemand duscht und keine Bewegung für
+    5min erkannt wurde
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_bad_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.duschen
+    state: 'off'
+  - condition: time
+    before: 00:00:00
+    after: '19:00:00'
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter_bad
+  mode: single
+- id: '1674837172502'
+  alias: Flur Lichter aus
+  description: Schalte alle Flur Lichter nach 1min ohne Bewegung aus.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_flur_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter_flur
+  mode: single
+- id: '1674837306253'
+  alias: Küchen Lichter an (abends)
+  description: Schalte alle Küchenlichter verlangsamt an wenn Bewegung erkannt wird.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_kuche_motion
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: time
+    after: '19:00:00'
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 50
+      transition: 5
+    target:
+      entity_id: light.alle_lichter_kuche
+  mode: single
+- id: '1674838661905'
+  alias: Küchen Lichter an
+  description: Schalte alle Küchenlichter an wenn Bewegung erkannt wird.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_kuche_motion
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: time
+    after: 00:00:00
+    before: '19:00:00'
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.alle_lichter_kuche
+  mode: single
+- id: '1674838724109'
+  alias: Bad Lichter an
+  description: Schalte alle Badlichter an wenn Bewegung erkannt wird.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_bad_motion
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: time
+    after: 00:00:00
+    before: '19:00:00'
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.alle_lichter_bad
+  mode: single
+- id: '1674838758516'
+  alias: Bad Lichter an (abdends)
+  description: Schalte alle Badlichter verlangsamt an wenn Bewegung erkannt wird.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_bad_motion
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: time
+    after: '19:00:00'
+  - condition: state
+    entity_id: input_boolean.duschen
+    state: 'off'
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 50
+      transition: 5
+    target:
+      entity_id: light.alle_lichter_bad
+  mode: single
+- id: '1674838797861'
+  alias: Flur Lichter an
+  description: Schalte alle Flurlichter an wenn Bewegung erkannt wird.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_flur_motion
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: time
+    after: 00:00:00
+    before: '19:00:00'
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.alle_lichter_flur
+  mode: single
+- id: '1674838830386'
+  alias: Flur Lichter an (abends)
+  description: Schalte alle Flurlichter verlangsamt an wenn Bewegung erkannt wird.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_sensor_flur_motion
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: time
+    after: '19:00:00'
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 50
+      transition: 5
+    target:
+      entity_id: light.alle_lichter_flur
+  mode: single
+- id: '1674935584315'
+  alias: Schalter oben Lichter toggeln
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 75bd405be849a4c2e0a487c6be7421fb
+    domain: bosch_shc
+    type: PRESS_SHORT
+    subtype: UPPER_BUTTON
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id: light.alle_lichter_wohnzimmer
+  mode: single
+- id: '1674936517666'
+  alias: Duschmodus an (Schalter oben lang)
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 75bd405be849a4c2e0a487c6be7421fb
+    domain: bosch_shc
+    type: PRESS_LONG
+    subtype: UPPER_BUTTON
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.duschen
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.alle_lichter_bad
+  mode: single
+- id: '1674936563746'
+  alias: Duschmodus aus (Schalter unten lang)
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 75bd405be849a4c2e0a487c6be7421fb
+    domain: bosch_shc
+    type: PRESS_LONG
+    subtype: LOWER_BUTTON
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.duschen
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter_bad
+  mode: single
+- id: '1674936703052'
+  alias: Schalter unten kurz alle lichter aus heizung auf auto
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 75bd405be849a4c2e0a487c6be7421fb
+    domain: bosch_shc
+    type: PRESS_SHORT
+    subtype: LOWER_BUTTON
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.alle_lichter
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: auto
+    target:
+      entity_id:
+      - climate.thermostat_bad
+      - climate.thermostat_kuche
+      - climate.thermostat_wohnzimmer
   mode: single

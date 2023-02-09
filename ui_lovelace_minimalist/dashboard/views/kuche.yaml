@@ -13,6 +13,7 @@ layout:
     ".  thermo        thermo        thermo        thermo        thermo        thermo        ."
 
     ".  lights-title  lights-title  lights-title  lights-title  lights-title  lights-title  ."
+    ".  lights-all    lights-all    lights-all    lights-all    lights-all    lights-all    ."
     ".  lights-1      lights-1      lights-1      lights-2      lights-2      lights-2      ."
 
     ".  sockets-title sockets-title sockets-title sockets-title sockets-title sockets-title ."
@@ -29,6 +30,7 @@ layout:
         "thermo         thermo"
 
         "lights-title   lights-title"
+        "lights-all     lights-all"
         "lights-1       lights-1"
         "lights-2       lights-2"
 
@@ -110,6 +112,21 @@ cards:
     name: "Lichter"
     view_layout:
       grid-area: "lights-title"
+
+  - type: "custom:button-card"
+    template: card_binary_sensor
+    entity: light.alle_lichter_kuche
+    variables:
+      ulm_card_binary_sensor_name: "Alle Lichter"
+    view_layout:
+      grid-area: "lights-all"
+    styles:
+      card:
+        - padding: "24px 12px"
+      grid:
+        - display: "flex"
+        - justify-content: "center"
+        - align-items: "center"
 
   - type: "custom:button-card"
     template: card_light
